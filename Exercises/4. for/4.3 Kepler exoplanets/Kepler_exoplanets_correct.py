@@ -59,7 +59,7 @@ for j in range(len(planet)):
     if  orbit[j]<=0.31:
         print('\nΟ πλανήτης Kepler-186%1s'%planet[j],'είναι εσωτερικός του Ερμή.\n')
     elif orbit[j] >0.31 and orbit[j]<0.72:
-        print('\nΟ πλανήτης Kepler-186%1s'%planet[j],'θα ήταν μεταξύ του Ερμή\
+        print('\nΟ πλανήτης Kepler-186%1s'%planet[j],'θα ήταν μεταξύ του Ερμή \
 και της Αφροδίτης.\n')
     else:
         print('\nΟ πλανήτης Kepler-186%1s'%planet[j],'είναι εξωτερικός της Αφροδίτης.\n')

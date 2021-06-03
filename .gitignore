@@ -6,9 +6,11 @@ student_exercises
 kahoot.py
 θέματα.pdf
 Exercises/2. Introduction Python
-Exercises/3. if-elif-else
+%Exercises/3. if-elif-else
+Exercises/3. if-elif-else/if_introduction.py
 Exercises/5. while
 Exercises/6. Workshop
+Exercises/*/*.pptx
 Notes/*/*.pptx
 Notes/*
 
