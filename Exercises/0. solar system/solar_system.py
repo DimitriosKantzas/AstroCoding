@@ -1,13 +1,39 @@
+import random
+
 def insert_planet():
     '''Επιλέγουμε έναν πλανήτη από το Ηλιακό σύστημα'''
-    print('Για ποιον πλανήτη θέλετε να μάθετε;\n\
-    Επιλέξτε έναν από τη λίστα: \n ',list_of_planets)
+    print('\nΓια ποιον πλανήτη θέλετε να μάθετε;\n\
+    Επιλέξτε έναν από τη λίστα: \n ',*list_of_planets)
     planet = input()
-    if planet in list_of_planets:
+    if planet in list_of_planets or planet in list_of_planets_no_stress:
+        if planet in ['Ερμής','ερμής','ερμης','ΕΡΜΗΣ','ΕΡΜΉΣ']:
+            planet = 'Ερμής'
+        elif planet in ['Αφροδίτη','αφροδίτη','αφροδιτη','ΑΦΡΟΔΙΤΗ','ΑΦΡΟΔΊΤΗ']:
+            planet = 'Αφροδίτη'
+        elif planet in ['Γη','Γή','γή','γη','ΓΗ','ΓΉ']:
+            planet = 'Γη'
+        elif planet in ['Άρης','άρης','αρης','ΆΡΗΣ','ΑΡΗΣ']:
+            planet = 'Άρης'
+        elif planet in ['Δίας','δίας','διας','ΔΙΑΣ','ΔΪΑΣ']:
+            planet = 'Δίας'
+        elif planet in ['Κρόνος','κρόνος','κρονος','ΚΡΟΝΟΣ','ΚΡΌΝΟΣ']:
+            planet = 'Κρόνος'
+        elif planet in ['Ουρανός','ουρανός','ουρανος','ΟΥΡΑΝΟΣ','ΟΥΡΑΝΌΣ']:
+            planet = 'Ουρανός'
+        elif planet in ['Ποσειδώνας','ποσειδώνας','ποσειδωνας','ΠΟΣΕΙΔΩΝΑΣ','ΠΟΣΕΙΔΏΝΑΣ']:
+            planet = 'Ποσειδώνας'
         print('\nΕπιλέξατε --- ',planet,' ---\n\n')
         return planet
+    elif planet in ['Πωσειδόνας','πωσειδόνας','πωσειδονας','ΠΩΣΕΙΔΟΝΑΣ','ΠΩΣΕΙΔΌΝΑΣ']:
+        answer = input('\nΜήπως εννοείται Ποσειδώνας; (y/n) ').lower()
+        if answer in ['y','yes','υ']:
+            planet = 'Ποσειδώνας'
+            print('\nΕπιλέξατε --- ',planet,' ---\n\n')
+            return planet
+        else:
+            return insert_planet()
     else:
-        print('\nΧμμ... ίσως αυτός ο πλανήτης να μην ανήκει στο ηλιακό μας σύστημα!\n')
+        print(f'\nΧμμ... ίσως ο πλανήτης {planet} να μην ανήκει στο ηλιακό μας σύστημα! Δοκιμάστε από τη λίστα!\n')
         return insert_planet()
 
 def insert_quantity():
@@ -22,8 +48,8 @@ def insert_quantity():
         αριθμός δορυφόρων     -- δορυφόροι\n\n\
         βαρύτητα              -- βαρύτητα\n\n\
     (Επιλέξτε τη λέξη-κλειδί που βρίσκεται δεξιά της ποσότητας)')
-    quantity = input()
-    if quantity in list_of_quantities:
+    quantity = input().lower()
+    if quantity in list_of_quantities or quantity in list_of_quantities_no_stress:
         print('\nEπιλέξατε --- ',quantity,' ---\n')
         return quantity
     else:
@@ -38,12 +64,12 @@ def print_distance(distance_string,name,distance):
 def ask_for_distance(d_min,d_max,name):
     '''Επιλέγουμε ποια απόσταση θέλουμε min/max/mean'''
     distance_of_planet=input('Ποια απόσταση θέλετε να μάθετε;\n\
-                             ελάχιστη, μέγιστη ή μέση;\n')
-    if distance_of_planet=='ελάχιστη':
+                             ελάχιστη, μέγιστη ή μέση;\n').lower()
+    if distance_of_planet in ['ελάχιστη','ελαχιστη']:
         print_distance(distance_of_planet,name,d_min)
-    elif distance_of_planet=='μέγιστη':
+    elif distance_of_planet in ['μέγιστη','μεγιστη']:
         print_distance(distance_of_planet,name,d_max)
-    elif distance_of_planet=='μέση':
+    elif distance_of_planet in ['μέση','μεση']:
         print_distance(distance_of_planet,name,(d_min+d_max)/2)
     else:
         print('Παρακαλώ επιλέξτε ελάχιστη, μέγιστη ή μέση!\n')
@@ -52,10 +78,10 @@ def ask_for_distance(d_min,d_max,name):
     
 def ask_units_of_year(name,year_d):
     '''Επιλέγουμε τις μονάδες του έτους'''
-    units_of_year = input('Θέλετε το έτος του πλανήτη σε ημέρες ή έτη;\n')
-    if units_of_year == 'ημέρες':
+    units_of_year = input('Θέλετε το έτος του πλανήτη σε -> ημέρες <-  ή -> έτη <- ;\n').lower()
+    if units_of_year in ['ημέρες','ημερες']:
         print('\nΤο έτος του πλανήτη',name,'είναι {:.2f}'.format(year_d),'ημέρες\n\n')
-    elif units_of_year == 'έτη':
+    elif units_of_year in ['έτη','ετη']:
         print('\nΤο έτος του πλανήτη',name,'είναι {:.2f}'.format(year_d/yr_Earth),'έτη\n\n')
     else:
         print('\nΠαρακαλώ επιλέξτε ημέρες ή έτη!\n')
@@ -68,10 +94,10 @@ def print_day(name,day,units):
     pass
 def ask_units_of_day(name,day):
     '''Επιλέγουμε τις μονάδες της ημέρας'''
-    units_of_day = input('Θέλετε την ημέρα του πλανήτη σε γήινες ημέρες ή ώρες;\n')
-    if units_of_day == 'ημέρες':
+    units_of_day = input('Θέλετε την ημέρα του πλανήτη σε γήινες -> ημέρες <-  ή  -> ώρες <- ;\n').lower()
+    if units_of_day in ['ημέρες','ημερες']:
         print_day(name,day,units_of_day)
-    elif units_of_day == 'ώρες':
+    elif units_of_day in ['ώρες','ωρες']:
         print_day(name,day*24,units_of_day)
     else:
         print('\nΠαρακαλώ επιλέξτε ημέρες ή ώρες!\n')
@@ -81,10 +107,10 @@ def ask_units_of_day(name,day):
 def new_quantity():
     '''Επιλέγουμε αν θέλουμε να εξετάσουμε νέα ποσότητα από τον ίδιο πλανήτη'''
     other_quant=\
-      input('Θα θέλατε να μάθετε κάποια άλλη πληροφορία για αυτόν τον πλανήτη; (Υ/n)\n')
-    if other_quant == 'Y' or other_quant == 'Υ' or other_quant == 'y':
+      input('Θα θέλατε να μάθετε κάποια άλλη πληροφορία για αυτόν τον πλανήτη; (Υ/n)\n').lower()
+    if other_quant in ['y','υ','yes']:
         return True
-    elif other_quant == 'n':
+    elif other_quant in ['n','ν','no']:
         return False
     else:
         print('\nΠαρακαλώ επίλέξτε Y (yes=ναι) ή n (no=όχι)')
@@ -93,10 +119,10 @@ def new_quantity():
 def another_planet():
     '''Επιλέγουμε αν θέλουμε να εξετάσουμε έναν άλλον πλανήτη'''
     other_planet=\
-      input('\nΘα θέλατε να μάθετε για κάποιον άλλον πλανήτη; (Υ/n)\n')
-    if other_planet == 'Y' or other_planet == 'Υ' or other_planet == 'y':
+      input('\nΘα θέλατε να μάθετε για κάποιον άλλον πλανήτη; (Υ/n)\n').lower()
+    if other_planet in ['y','yes','υ']:
         return True
-    elif other_planet == 'n':
+    elif other_planet in ['n','no','ν']:
         return False
     else:
         print('Παρακαλώ επίλέξτε Y (yes=ναι) ή n (no=όχι)')
@@ -104,26 +130,36 @@ def another_planet():
 
 def Kepler_third_law(distance,year_d):
     '''Εξετάζουμε τον 3ο νόμο του Kepler για τον υπο εξέταση πλανήτη'''
-    answer = input('Ποια από τις παρακάτω εκφράσεις είναι η σωστή διατύπωση του 3ου νόμου \
-            του Kepler;\n\n\
-                A. α**3/T**2\n\n\
-                B. α**2/T**3\n\n\
-                C. α**2/T**2\n\n\
-                D. α/T\n\n')
-    answer_list = ['A','B','C','D','Α','Β']
+    all_choices  = ['α**3/T**2','α**2/T**3','α**2/T**2','α/T']
+    random.shuffle(all_choices)
+    print('\n\nΠοια από τις παρακάτω εκφράσεις είναι η σωστή διατύπωση του 3ου νόμου του Kepler;\n\n')
+    for ind,choice in zip(['A.','B.','C.','D.'],all_choices):
+        print(ind,choice,'\n')
+    answer = input().lower()
+    answer_list = ['a','b','c','d','α','β','1','2','3','4']
     if answer in answer_list:
-        if answer == 'A' or answer == 'Α':
+        if answer in ['a','α','1']:
+            answer_index = 0
+        elif answer in ['b','β','2']:
+            answer_index = 1
+        elif answer in ['c','3']:
+            answer_index = 2
+        elif answer in ['d','4']:
+            answer_index = 3
+        if all_choices[answer_index]=='α**3/T**2':
             print('\n\tΣυγχαρητήρια! Σωστή απάντηση!\n')
             print('\nO 3ος νόμος του Kepler για αυτόν τον πλανήτη δίνει τιμή ίση με:\n\n \
                 {:.2e}'.format(distance**3/year_d**2),' AU**3/day**2\n\n')
+            return
         else:
             print('\n\tΚρίμα... λάθος απάντηση... Δεν πειράζει όμως! Δοκιμάστε ξανά!\n')
-            Kepler_third_law(distance,year_d)
+            return Kepler_third_law(distance,year_d)
     else:
-        print('\n\tΟυπς δεν υπάρχει η απάντηση που προσπαθείτε να δώσετε...\n\
+        print(f'\n\tΟυπς δεν υπάρχει η απάντηση {answer} που προσπαθείτε να δώσετε...\n\
                     Δοκιμάστε ξανά!\n\n')
-        Kepler_third_law(distance,year_d)
+        return Kepler_third_law(distance,year_d)
         
+
 def new_planet():
     '''Εξετάζουμε ένα νέο πλανήτη'''
     planet = insert_planet()
@@ -209,7 +245,7 @@ def new_planet():
         'βαρύτητα': 1.14 #in g        
     }
     
-    if planet == 'Ερμής':
+    if  planet == 'Ερμής':
         planet_library = Mercury
     elif planet == 'Αφροδίτη':
         planet_library = Venus
@@ -231,19 +267,19 @@ def new_planet():
     new_quant_flag = True
     while new_quant_flag:
         quantity = insert_quantity()
-        if quantity == 'απόσταση':
+        if quantity in ['απόσταση','αποσταση']:
             ask_for_distance(planet_library['ελάχιστη απόσταση'],planet_library['μέγιστη απόσταση'],planet)
-        elif quantity == 'έτος':
+        elif quantity in ['έτος','ετος']:
             ask_units_of_year(planet,planet_library['έτος'])
-        elif quantity == 'ημέρα':
+        elif quantity in ['ημέρα','ημερα']:
             ask_units_of_day(planet,planet_library['ημέρα'])
-        elif quantity == 'ακτίνα':
+        elif quantity in ['ακτίνα','ακτινα']:
             print('\nΗ ακτίνα του πλανήτη %s είναι %.2f γήινες ακτίνες.\n\n'%(planet,planet_library['ακτίνα']))
-        elif quantity == 'μάζα':
+        elif quantity in ['μάζα','μαζα']:
             print('\nΗ μάζα του πλανήτη %s είναι %.2f γήινες μάζες.\n\n'%(planet,planet_library['μάζα']))
-        elif quantity == 'δορυφόροι':
+        elif quantity in ['δορυφόροι','δορυφοροι']:
             print('\nΟ πλανήτης %s έχει %i δορυφόρους.\n\n'%(planet,planet_library['δορυφόροι']))
-        elif quantity == 'βαρύτητα':
+        elif quantity in ['βαρύτητα','βαρυτητα']:
             print('\nΟ πλανήτης %s έχει %.2f τη γήινη βαρύτητα.\n\n'%(planet,planet_library['βαρύτητα']))
         else:
             print('Θα συμπληρώσουμε τις πληροφορίες σύντομα! Μείνετε συντονισμένοι!\n')
@@ -255,23 +291,27 @@ def new_planet():
     return planet_library
 
 ################################################################################
-list_of_planets =['Ερμής','Αφροδίτη','Γη','Άρης','Δίας',\
+list_of_planets =['Ερμής','Αφροδίτη','Γη','Άρης','Δίας',
                   'Κρόνος','Ουρανός','Ποσειδώνας']
+list_of_planets_no_stress =['ερμης','αφροδιτη','γη','αρης','διας',
+                  'κρονος','ουρανος','ποσειδωνας']
 
 list_of_quantities=['απόσταση','έτος','ημέρα','ακτίνα','μάζα','δορυφόροι','βαρύτητα']
+list_of_quantities_no_stress=['αποσταση','ετος','ημερα','ακτινα','μαζα','δορυφοροι','βαρυτητα']
 
 yr_Earth = 365.0
 
-print('\nΓΝΩΡΙΣΤΕ ΤΟΥΣ ΠΛΑΝΗΤΕΣ!\n\n')
-new_planet_flag = True
-
 if __name__ == '__main__':
+    print('\nΓΝΩΡΙΣΤΕ ΤΟΥΣ ΠΛΑΝΗΤΕΣ!\n\n')
+    new_planet_flag = True
+
     while new_planet_flag:
         planet_lib= new_planet()
 
-        print('Θέλετε να μάθετε για τον 3ο νόμο του Kepler για αυτόν τον πλανήτη; Υ/n\n')
-        K3l_flag = input()
-        if K3l_flag == 'Y' or K3l_flag == 'Υ' or K3l_flag == 'y':
+        print('\nΘέλετε να μάθετε για τον 3ο νόμο του Kepler για αυτόν τον πλανήτη; Υ/n\n')
+        K3l = input().lower()
+        K3l_flag = True if K3l in ['y','yes','υ'] else False
+        if K3l_flag:
             Kepler_third_law((planet_lib['ελάχιστη απόσταση']+planet_lib['μέγιστη απόσταση'])/2,planet_lib['έτος'])
 
         new_planet_flag = another_planet()
